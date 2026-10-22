@@ -1,20 +1,23 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Layout } from './components/Layout';
-// Adjust these import paths if your files are in different folders
-import { MyProvider } from './MyProvider'; 
-import Child from './Child'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { FavoritesProvider } from './FavoritesContext';
+import Home from './Home'; 
+import Favorites from './Favotitas';
+import About from './About';
+import { Detail } from './components/Detail';
 
-function App() {
+const App = () => {
   return (
-    // The Provider MUST wrap everything that needs access to the context
-    <MyProvider>
-      <BrowserRouter>
-        {/* If you are testing the Child component, it goes inside here */}
-        <Child /> 
-        <Layout />
-      </BrowserRouter>
-    </MyProvider>
+    <Router>
+      <FavoritesProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favoritos" element={<Favorites />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/coin/:id" element={<Detail />} />
+        </Routes>
+      </FavoritesProvider>
+    </Router>
   );
-}
+};
 
 export default App;
